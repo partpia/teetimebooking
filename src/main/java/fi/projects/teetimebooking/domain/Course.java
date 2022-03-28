@@ -25,7 +25,7 @@ public class Course {
 	
 	@ManyToOne
 	@JsonIgnoreProperties("courses")
-	@JoinColumn(name = "golfClubId", nullable = false)
+	@JoinColumn(name = "golfClubId")
 	private GolfClub golfClub;
 	
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "course")

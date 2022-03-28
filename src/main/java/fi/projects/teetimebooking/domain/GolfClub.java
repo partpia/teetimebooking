@@ -9,6 +9,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 @Entity
 public class GolfClub {
 	
@@ -18,6 +20,7 @@ public class GolfClub {
 	private String golfClubName;
 	
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "golfClub")
+	@JsonIgnoreProperties({ "golfClub", "teeOffs" })
 	private List<Course> courses;
 	
 	public GolfClub() {}

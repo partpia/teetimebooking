@@ -46,7 +46,9 @@ public class TeetimebookingApplication {
 			
 			log.info("Save one course");
 			Course course1 = new Course("Holy Round", 18, gc1);
+			Course course2 = new Course("Half of Joy", 9, gc1);
 			courseRepository.save(course1);
+			courseRepository.save(course2);
 			
 			log.info("Save one teetime");
 			TeeTime teeTime1 = new TeeTime(new Date(), 110, course1);

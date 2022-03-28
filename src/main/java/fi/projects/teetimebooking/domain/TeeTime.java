@@ -13,6 +13,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 @Entity
 public class TeeTime {
 	@Id
@@ -22,6 +24,7 @@ public class TeeTime {
 	private int maxHandicapSum;
 	
 	@ManyToOne
+	@JsonIgnoreProperties("teeOffs")
 	@JoinColumn(name = "courseId", nullable = false)
 	private Course course;
 	

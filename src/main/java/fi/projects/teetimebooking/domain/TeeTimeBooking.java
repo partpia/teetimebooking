@@ -8,6 +8,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.MapsId;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 @Entity
 public class TeeTimeBooking {
 	@EmbeddedId
@@ -15,10 +17,12 @@ public class TeeTimeBooking {
 	
 	@ManyToOne
 	@MapsId("userId")
+	@JsonIgnoreProperties("teeTimes")
 	@JoinColumn(name = "userId")
 	private User user;
 	
 	@ManyToOne
+	@JsonIgnoreProperties("golfers")
 	@MapsId("teeTimeId")
 	@JoinColumn(name = "teeTimeId")
 	private TeeTime teeTime;
