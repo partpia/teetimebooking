@@ -24,11 +24,12 @@ public class Course {
 	private int holes;
 	
 	@ManyToOne
-	@JsonIgnoreProperties("courses")
+	@JsonIgnoreProperties({ "courses", "golfClubName" })
 	@JoinColumn(name = "golfClubId")
 	private GolfClub golfClub;
 	
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "course")
+	@JsonIgnoreProperties({ "course", "golfers" })
 	private List<TeeTime> teeOffs;
 
 	public Course() {}
