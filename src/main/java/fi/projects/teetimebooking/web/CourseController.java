@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import fi.projects.teetimebooking.domain.Course;
-import fi.projects.teetimebooking.domain.CourseRepository;
+import fi.projects.teetimebooking.repository.CourseRepository;
 
 @RestController
 public class CourseController {

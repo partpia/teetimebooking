@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import fi.projects.teetimebooking.domain.GolfClub;
-import fi.projects.teetimebooking.domain.GolfClubRepository;
+import fi.projects.teetimebooking.repository.GolfClubRepository;
 
 @RestController
 public class GolfClubController {

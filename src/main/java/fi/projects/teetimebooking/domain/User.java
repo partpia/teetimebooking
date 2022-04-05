@@ -36,10 +36,10 @@ public class User {
 
 	@ManyToOne
 	@JsonIgnoreProperties("members")
-	@JoinColumn(name = "membershipId", nullable = false)
+	@JoinColumn(name = "membershipId")
 	private Membership member;
 
-	@OneToMany(mappedBy = "user")
+	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
 	private Set<TeeTimeBooking> teeTimes = new HashSet<TeeTimeBooking>();
 
 	public User() {
@@ -68,6 +68,13 @@ public class User {
 		this.role = role;
 		this.member = member;
 	}
+	
+	public void addTeeTimeBooking(TeeTimeBooking teeTimeBooking) {
+		this.teeTimes.add(teeTimeBooking);
+		teeTimeBooking.setUser(this);
+	}
+	
+	// update, remove?
 
 	public void setUserId(Long userId) {
 		this.userId = userId;
@@ -133,7 +140,6 @@ public class User {
 	@Override
 	public String toString() {
 		return "User [userId=" + userId + ", username=" + username + ", firstName=" + firstName + ", lastName="
-				+ lastName + ", email=" + email + ", handicap=" + handicap + ", role=" + role + ", member=" + member
-				+ ", teeTimes=" + teeTimes + "]";
+				+ lastName + ", email=" + email + ", handicap=" + handicap + ", role=" + role + "]";
 	}
 }
