@@ -79,9 +79,9 @@ public class Course {
 	public List<TeeTime> getTeeOffs() {
 		return teeOffs;
 	}
+
 	@Override
 	public String toString() {
-		return "Course [courseId=" + courseId + ", name=" + name + ", holes=" + holes + ", golfClub=" + golfClub
-				+ ", teeOffs=" + teeOffs + "]";
+		return "Course [courseId=" + courseId + ", name=" + name + ", holes=" + holes + "]";
 	}
 }

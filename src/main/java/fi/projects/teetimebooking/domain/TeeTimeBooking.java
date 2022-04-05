@@ -1,49 +1,48 @@
 package fi.projects.teetimebooking.domain;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 
-import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.MapsId;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
 public class TeeTimeBooking {
-	@EmbeddedId
-	private TeeTimeBookingId bookingId = new TeeTimeBookingId();
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	private Long teeTimeBookingId;
 	
 	@ManyToOne
-	@MapsId("userId")
-	@JsonIgnoreProperties("teeTimes")
 	@JoinColumn(name = "userId")
+	@JsonIgnoreProperties({ "username", "passwordHash", "firstName", "lastName", "email", "role", "member", "teeTimes" })
 	private User user;
 	
 	@ManyToOne
-	@JsonIgnoreProperties("golfers")
-	@MapsId("teeTimeId")
 	@JoinColumn(name = "teeTimeId")
+	@JsonIgnoreProperties({ "startDateTime", "teetimes", "bookedTeeTimes"})
 	private TeeTime teeTime;
 	
 	private Status teeTimeStatus;
-	private Date timestamp;
+	private LocalDateTime timestamp;
 
 	public TeeTimeBooking() {}
 	
-	public TeeTimeBooking(TeeTimeBookingId bookingId, User user, TeeTime teeTime, Status teeTimeStatus,
-			Date timestamp) {
+	public TeeTimeBooking(User user, TeeTime teeTime, Status teeTimeStatus,
+			LocalDateTime timestamp) {
 		super();
-		this.bookingId = bookingId;
 		this.user = user;
 		this.teeTime = teeTime;
 		this.teeTimeStatus = teeTimeStatus;
 		this.timestamp = timestamp;
 	}
 
-	public void setBookingId(TeeTimeBookingId bookingId) {
-		this.bookingId = bookingId;
+	public void setTeeTimeBookingId(Long teeTimeBookingId) {
+		this.teeTimeBookingId = teeTimeBookingId;
 	}
 	public void setUser(User user) {
 		this.user = user;
@@ -54,11 +53,11 @@ public class TeeTimeBooking {
 	public void setTeeTimeStatus(Status teeTimeStatus) {
 		this.teeTimeStatus = teeTimeStatus;
 	}
-	public void setTimestamp(Date timestamp) {
+	public void setTimestamp(LocalDateTime timestamp) {
 		this.timestamp = timestamp;
 	}
-	public TeeTimeBookingId getBookingId() {
-		return bookingId;
+	public Long getTeeTimeBookingId() {
+		return teeTimeBookingId;
 	}
 	public User getUser() {
 		return user;
@@ -69,12 +68,12 @@ public class TeeTimeBooking {
 	public Status getTeeTimeStatus() {
 		return teeTimeStatus;
 	}
-	public Date getTimestamp() {
+	public LocalDateTime getTimestamp() {
 		return timestamp;
 	}
 	@Override
 	public String toString() {
-		return "TeeTimeBooking [bookingId=" + bookingId + ", user=" + user + ", teeTime=" + teeTime + ", teeTimeStatus="
+		return "TeeTimeBooking [bookingId=" + teeTimeBookingId + ", user=" + user.getUserId() + ", teeTime=" + teeTime.getTeeTimeId() + ", teeTimeStatus="
 				+ teeTimeStatus + ", timestamp=" + timestamp + "]";
 	}
 }

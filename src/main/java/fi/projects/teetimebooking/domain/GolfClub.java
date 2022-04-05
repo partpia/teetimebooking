@@ -50,6 +50,6 @@ public class GolfClub {
 	}
 	@Override
 	public String toString() {
-		return "GolfClub [golfClubId=" + golfClubId + ", golfClubName=" + golfClubName + ", courses=" + courses + "]";
+		return "GolfClub [golfClubId=" + golfClubId + ", golfClubName=" + golfClubName + "]";
 	}
 }

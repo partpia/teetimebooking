@@ -10,6 +10,8 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 @Entity
 public class Membership {
 	
@@ -19,6 +21,7 @@ public class Membership {
 	private String golfClubName;
 
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "member")
+	@JsonIgnoreProperties({ "username", "passwordHash", "firstName", "lastName", "email", "handicap", "role", "member", "teeTimes" })
 	private List<User> members;
 	
 	public Membership() {}
