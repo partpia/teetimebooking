@@ -104,7 +104,7 @@ public class TeeTime {
 
 	@Override
 	public String toString() {
-		return "TeeTime [teeTimeId=" + teeTimeId + ", startDate=" + startDate + ", maxHandicapSum="
+		return "TeeTime [teeTimeId=" + teeTimeId + ", startDate=" + startDate + ", startTime=" + startTime + ", maxHandicapSum="
 				+ maxHandicapSum + "]";
 	}
 }
