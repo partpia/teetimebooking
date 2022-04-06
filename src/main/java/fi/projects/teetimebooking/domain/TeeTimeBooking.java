@@ -24,7 +24,7 @@ public class TeeTimeBooking {
 	
 	@ManyToOne
 	@JoinColumn(name = "teeTimeId")
-	@JsonIgnoreProperties({ "startDateTime", "teetimes", "bookedTeeTimes"})
+	@JsonIgnoreProperties({ "startDate", "startTime", "teetimes", "bookedTeeTimes"})
 	private TeeTime teeTime;
 	
 	private Status teeTimeStatus;

@@ -1,6 +1,7 @@
 package fi.projects.teetimebooking.domain;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -24,7 +25,8 @@ public class TeeTime {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long teeTimeId;
 	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm")
-	private LocalDateTime startDateTime;
+	private LocalDate startDate;
+	private LocalTime startTime;
 	private double maxHandicapSum;
 
 	@ManyToOne
@@ -39,9 +41,10 @@ public class TeeTime {
 	public TeeTime() {
 	}
 
-	public TeeTime(LocalDateTime startDateTime, int maxHandicapSum, Course course) {
+	public TeeTime(LocalDate startDateTime, LocalTime startTime, int maxHandicapSum, Course course) {
 		super();
-		this.startDateTime = startDateTime;
+		this.startDate = startDateTime;
+		this.startTime = startTime;
 		this.maxHandicapSum = maxHandicapSum;
 		this.course = course;
 	}
@@ -55,8 +58,12 @@ public class TeeTime {
 		this.teeTimeId = teeTimeId;
 	}
 
-	public void setStartDateTime(LocalDateTime startDateTime) {
-		this.startDateTime = startDateTime;
+	public void setStartDate(LocalDate startDateTime) {
+		this.startDate = startDateTime;
+	}
+	
+	public void setStartTime(LocalTime startTime) {
+		this.startTime = startTime;
 	}
 
 	public void setMaxHandicapSum(double maxHandicapSum) {
@@ -75,8 +82,12 @@ public class TeeTime {
 		return teeTimeId;
 	}
 
-	public LocalDateTime getStartDateTime() {
-		return startDateTime;
+	public LocalDate getStartDate() {
+		return startDate;
+	}
+	
+	public LocalTime getStartTime() {
+		return startTime;
 	}
 
 	public double getMaxHandicapSum() {
@@ -93,7 +104,7 @@ public class TeeTime {
 
 	@Override
 	public String toString() {
-		return "TeeTime [teeTimeId=" + teeTimeId + ", startDateTime=" + startDateTime + ", maxHandicapSum="
+		return "TeeTime [teeTimeId=" + teeTimeId + ", startDate=" + startDate + ", maxHandicapSum="
 				+ maxHandicapSum + "]";
 	}
 }
