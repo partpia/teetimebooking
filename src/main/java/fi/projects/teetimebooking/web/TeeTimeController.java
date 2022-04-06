@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import fi.projects.teetimebooking.domain.TeeTime;
 import fi.projects.teetimebooking.repository.TeeTimeRepository;
+import fi.projects.teetimebooking.service.TeeTimeService;
 
 @RestController
 public class TeeTimeController {
@@ -16,8 +17,11 @@ public class TeeTimeController {
 	@Autowired
 	private TeeTimeRepository teeTimeRepository;
 	
+	@Autowired
+	private TeeTimeService teeTimeService;
+	
 	@GetMapping("/teetimes")
-	public List<TeeTime> getTeeTimes() {
+	public List<TeeTime> getAllTeeTimes() {
 		return (List<TeeTime>) teeTimeRepository.findAll();
 	}
 	
@@ -26,6 +30,9 @@ public class TeeTimeController {
 		return teeTimeRepository.findById(id).get();
 	}
 	
-	
-	
+	@GetMapping("/teetimes/courses/{id}/{date}")
+	public List<TeeTime> getTeeTimesByCourseAndDate(@PathVariable Long id, @PathVariable(name = "date") String dateString) {
+		return teeTimeService.getAllTeeTimesByCourseAndDate(id, dateString);
+	}
+		
 }
