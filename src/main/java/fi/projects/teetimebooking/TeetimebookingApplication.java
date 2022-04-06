@@ -1,6 +1,8 @@
 package fi.projects.teetimebooking;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -50,10 +52,12 @@ public class TeetimebookingApplication {
 			courseRepository.save(course2);
 			
 			log.info("Save one teetime");
-			TeeTime teeTime1 = new TeeTime(LocalDateTime.now(), 110, course1);
-			TeeTime teeTime2 = new TeeTime(LocalDateTime.now().plusDays(1), 110, course1);
+			TeeTime teeTime1 = new TeeTime(LocalDate.now(), LocalTime.parse("12:00"), 110, course1);
+			TeeTime teeTime2 = new TeeTime(LocalDate.now().plusDays(1), LocalTime.parse("13:00"), 110, course1);
+			TeeTime teeTime3 = new TeeTime(LocalDate.now().plusDays(1), LocalTime.parse("13:15"), 110, course1);
 			teeTimeRepository.save(teeTime1);
 			teeTimeRepository.save(teeTime2);
+			teeTimeRepository.save(teeTime3);
 			
 			log.info("Save one membership-club");
 			Membership member1 = new Membership("Sand Coast Golfers");
@@ -98,6 +102,16 @@ public class TeetimebookingApplication {
 			teeTimeBookingRepository.save(booking3);
 			user2.addTeeTimeBooking(booking3);
 			teeTime1.addBookedTeeTime(booking3);
+			
+			TeeTimeBooking booking4 = new TeeTimeBooking();
+			booking4.setUser(user1);
+			booking4.setTeeTime(teeTime3);
+			booking4.setTeeTimeStatus(Status.RESERVED);
+			booking4.setTimestamp(LocalDateTime.now());
+			
+			teeTimeBookingRepository.save(booking4);
+			user1.addTeeTimeBooking(booking4);
+			teeTime3.addBookedTeeTime(booking4);
 			
 		};
 	}
