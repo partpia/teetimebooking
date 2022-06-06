@@ -34,10 +34,9 @@ public class TeeTimeBookingService {
 	private EntityManager em;
 	
 	@Transactional
-	public TeeTimeBooking bookTeeTime(Long userId, Long teeTimeId) {
-		TeeTime teeTime = teeTimeRepository.findById(teeTimeId).get();
-		User user = userRepository.findById(userId).get();
-		System.out.println("LÄHTIJÄT: " + teeTime.getBookedTeeTimes().size());
+	public TeeTimeBooking bookTeeTime(TeeTimeBooking teeTimeBooking) {
+		TeeTime teeTime = teeTimeRepository.findById(teeTimeBooking.getTeeTime().getTeeTimeId()).get();
+		User user = userRepository.findById(teeTimeBooking.getUser().getUserId()).get();
 		
 		if (teeTime.getBookedTeeTimes().size() < 4 && isEqualOrUnderMaxHcpSum(user, teeTime)) {
 			TeeTimeBooking booking = new TeeTimeBooking();
@@ -66,7 +65,6 @@ public class TeeTimeBookingService {
 		for (TeeTimeBooking booking: currentBookings) {
 			sum += booking.getUser().getHandicap();
 		}
-		System.out.println("SUMMA ON : " + sum);
 		return sum;
 	}
 	
