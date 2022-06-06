@@ -55,9 +55,13 @@ public class TeetimebookingApplication {
 			TeeTime teeTime1 = new TeeTime(LocalDate.now(), LocalTime.parse("12:00"), 110, course1);
 			TeeTime teeTime2 = new TeeTime(LocalDate.now().plusDays(1), LocalTime.parse("13:00"), 110, course1);
 			TeeTime teeTime3 = new TeeTime(LocalDate.now().plusDays(1), LocalTime.parse("13:15"), 110, course1);
+			TeeTime teeTime4 = new TeeTime(LocalDate.now(), LocalTime.parse("10:15"), 110, course2);
+			TeeTime teeTime5 = new TeeTime(LocalDate.now().plusDays(1), LocalTime.parse("11:45"), 110, course2);
 			teeTimeRepository.save(teeTime1);
 			teeTimeRepository.save(teeTime2);
 			teeTimeRepository.save(teeTime3);
+			teeTimeRepository.save(teeTime4);
+			teeTimeRepository.save(teeTime5);
 			
 			log.info("Save one membership-club");
 			Membership member1 = new Membership("Sand Coast Golfers");
@@ -112,6 +116,26 @@ public class TeetimebookingApplication {
 			teeTimeBookingRepository.save(booking4);
 			user1.addTeeTimeBooking(booking4);
 			teeTime3.addBookedTeeTime(booking4);
+			
+			TeeTimeBooking booking5 = new TeeTimeBooking();
+			booking5.setUser(user1);
+			booking5.setTeeTime(teeTime4);
+			booking5.setTeeTimeStatus(Status.RESERVED);
+			booking5.setTimestamp(LocalDateTime.now());
+			
+			teeTimeBookingRepository.save(booking5);
+			user1.addTeeTimeBooking(booking5);
+			teeTime4.addBookedTeeTime(booking5);
+			
+			TeeTimeBooking booking6 = new TeeTimeBooking();
+			booking6.setUser(user2);
+			booking6.setTeeTime(teeTime5);
+			booking6.setTeeTimeStatus(Status.RESERVED);
+			booking6.setTimestamp(LocalDateTime.now());
+			
+			teeTimeBookingRepository.save(booking6);
+			user2.addTeeTimeBooking(booking6);
+			teeTime5.addBookedTeeTime(booking6);
 			
 		};
 	}
