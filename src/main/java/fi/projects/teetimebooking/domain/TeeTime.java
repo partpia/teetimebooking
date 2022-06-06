@@ -30,7 +30,7 @@ public class TeeTime {
 	private double maxHandicapSum;
 
 	@ManyToOne
-	@JsonIgnoreProperties({ "teeOffs", "name", "holes", "golfClub" })
+	@JsonIgnoreProperties({ "teeOffs", "holes", "golfClub" })
 	@JoinColumn(name = "courseId")
 	private Course course;
 
