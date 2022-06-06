@@ -3,9 +3,11 @@ package fi.projects.teetimebooking.web;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import fi.projects.teetimebooking.domain.TeeTimeBooking;
@@ -33,9 +35,10 @@ public class TeeTimeBookingController {
 		return teeTimeBookingRepository.findById(id).get();
 	}
 	
-	@PostMapping("/teetimebookings/teetimes/{teeTimeId}/users/{userId}")
-	public TeeTimeBooking saveTeeTimeBooking(@PathVariable(name = "teeTimeId") Long teeTimeId, @PathVariable(name = "userId") Long userId) {
-		return teeTimeBookingService.bookTeeTime(userId, teeTimeId);
+	@CrossOrigin(origins = "http://localhost:3000")
+	@PostMapping("/teetimebookings")
+	public TeeTimeBooking saveTeeTimeBooking(@RequestBody TeeTimeBooking teeTimeBooking) {
+		return teeTimeBookingService.bookTeeTime(teeTimeBooking);
 	}	
 
 }
